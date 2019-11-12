@@ -1,5 +1,7 @@
 package com.stepasha.zoo.handlers;
 
+import com.stepasha.zoo.exceptions.ResourceFoundException;
+import com.stepasha.zoo.exceptions.ResourceNotFoundException;
 import com.stepasha.zoo.exceptions.ValidationError;
 import com.stepasha.zoo.models.ErrorDetail;
 import org.slf4j.Logger;
