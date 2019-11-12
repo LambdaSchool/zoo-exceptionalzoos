@@ -1,5 +1,7 @@
 package com.stepasha.zoo.services;
 
+import com.stepasha.zoo.exceptions.ResourceFoundException;
+import com.stepasha.zoo.exceptions.ResourceNotFoundException;
 import com.stepasha.zoo.models.Telephone;
 import com.stepasha.zoo.models.Zoo;
 import com.stepasha.zoo.repos.AnimalRepository;
@@ -34,16 +36,16 @@ public class ZooServiceImpl implements ZooService{
     @Override
     public Zoo findZooById(long id) {
         return zoorepo.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException(Long.toString(id)));
+                .orElseThrow(()-> new ResourceNotFoundException(Long.toString(id)));
     }
 
     @Override
-    public Zoo findZooByName(String name) throws EntityNotFoundException{
+    public Zoo findZooByName(String name) throws ResourceNotFoundException{
         Zoo zoo = zoorepo.findByZooname(name);
 
         if (zoo == null)
         {
-            throw new EntityNotFoundException("Zoo " + name + " not found!");
+            throw new ResourceNotFoundException("Zoo " + name + " not found!");
         }
         return zoo;
     }
@@ -82,22 +84,22 @@ public class ZooServiceImpl implements ZooService{
 
     @Override
     public void deleteZooAnimal(long zooid, long animalid) {
-        zoorepo.findById(zooid).orElseThrow(() -> new EntityNotFoundException("Zoo id " + zooid + " not found"));
-        animalRepo.findById(zooid).orElseThrow(() -> new EntityNotFoundException("Zoo id " + animalid + " not found"));
+        zoorepo.findById(zooid).orElseThrow(() -> new ResourceNotFoundException("Zoo id " + zooid + " not found"));
+        animalRepo.findById(zooid).orElseThrow(() -> new ResourceNotFoundException("Zoo id " + animalid + " not found"));
 
         if (animalRepo.checkZooAnimalCombo(zooid, animalid).getCount() > 0) {
             animalRepo.deleteZooAnimals(zooid, animalid);
-        } else throw new EntityNotFoundException("Zoo Animal Combo does not exist");
+        } else throw new ResourceNotFoundException("Zoo Animal Combo does not exist");
     }
 
     @Override
     public void addZooAnimal(long zooid, long animalid) {
-        zoorepo.findById(zooid).orElseThrow(() -> new EntityNotFoundException("Zoo id " + zooid + " not found"));
-        animalRepo.findById(animalid).orElseThrow(() -> new EntityNotFoundException("Zoo id " + animalid + " not found"));
+        zoorepo.findById(zooid).orElseThrow(() -> new ResourceFoundException("Zoo id " + zooid + " not found"));
+        animalRepo.findById(animalid).orElseThrow(() -> new ResourceNotFoundException("Zoo id " + animalid + " not found"));
 
         if (animalRepo.checkZooAnimalCombo(zooid, animalid).getCount() <= 0) {
             animalRepo.insertZooanimal(zooid, animalid);
-        } else throw new EntityNotFoundException("Zoo animal combo already exists");
+        } else throw new ResourceNotFoundException("Zoo animal combo already exists");
     }
 
 }
