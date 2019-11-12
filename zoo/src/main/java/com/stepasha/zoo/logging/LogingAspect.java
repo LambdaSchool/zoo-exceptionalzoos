@@ -8,17 +8,10 @@ import org.springframework.boot.logging.LogLevel;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
-
-/**
- * Created by satyendra on 11/7/16.
- * http://www.tothenew.com/blog/logging-with-spring-aop-and-custom-annotations-in-java-application/
- */
-//todo 12 logging implementation
 @Component
 @Aspect
-public class LoggingAspect
-{
-    @Around(value = "@within(com.lambdaschool.usermodel.logging.Loggable) || @annotation(com.lambdaschool.usermodel.logging.Loggable)")
+public class LogingAspect {
+    @Around(value = "@within(com.stepasha.zoo.logging.Loggable) || @annotation(com.stepasha.zoo.logging.Loggable)")
     public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable
     {
 
