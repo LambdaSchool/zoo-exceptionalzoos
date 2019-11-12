@@ -3,6 +3,7 @@ package com.stepasha.zoo.handlers;
 import com.stepasha.zoo.exceptions.ResourceFoundException;
 import com.stepasha.zoo.exceptions.ResourceNotFoundException;
 import com.stepasha.zoo.exceptions.ValidationError;
+import com.stepasha.zoo.logging.Loggable;
 import com.stepasha.zoo.models.ErrorDetail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 //todo 4 create handler to handle exc. in REST API
-
+//todo 4 create handler to handle exc. in REST API
+@Loggable
 // bean shared across controller classes
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice

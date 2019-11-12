@@ -2,6 +2,7 @@ package com.stepasha.zoo.services;
 
 import com.stepasha.zoo.exceptions.ResourceFoundException;
 import com.stepasha.zoo.exceptions.ResourceNotFoundException;
+import com.stepasha.zoo.logging.Loggable;
 import com.stepasha.zoo.models.Telephone;
 import com.stepasha.zoo.models.Zoo;
 import com.stepasha.zoo.repos.AnimalRepository;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-
+@Loggable
 @Service(value = "zooService")
 public class ZooServiceImpl implements ZooService{
 

@@ -1,6 +1,7 @@
 package com.stepasha.zoo.controllers;
 
 import com.stepasha.zoo.handlers.RestExceptionHandler;
+import com.stepasha.zoo.logging.Loggable;
 import com.stepasha.zoo.models.Zoo;
 import com.stepasha.zoo.services.TelephoneService;
 import com.stepasha.zoo.services.ZooService;
@@ -20,6 +21,7 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping(value = "/zoos")
+@Loggable
 public class ZooController
 {
     //todo 10 add logger make sure LSF4J
@@ -77,6 +79,8 @@ public class ZooController
     @RequestBody
             Zoo newZoo) throws URISyntaxException
     {
+        logger.trace(request.getMethod()
+                .toUpperCase() + " " + request.getRequestURI() + " accessed");
         newZoo = zooService.saveZoo(newZoo);
 
         // set the location header for the newly created resource

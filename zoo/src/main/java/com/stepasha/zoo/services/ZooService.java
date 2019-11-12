@@ -1,9 +1,10 @@
 package com.stepasha.zoo.services;
 
+import com.stepasha.zoo.logging.Loggable;
 import com.stepasha.zoo.models.Zoo;
 
 import java.util.ArrayList;
-
+@Loggable
 public interface ZooService {
     ArrayList<Zoo> findAllZoos();
 
