@@ -1,6 +1,8 @@
 package com.stepasha.zoo.models;
 
 
+import com.stepasha.zoo.exceptions.ValidationError;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
