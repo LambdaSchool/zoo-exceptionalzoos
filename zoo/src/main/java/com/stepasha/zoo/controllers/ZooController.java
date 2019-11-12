@@ -1,8 +1,11 @@
 package com.stepasha.zoo.controllers;
 
+import com.stepasha.zoo.handlers.RestExceptionHandler;
 import com.stepasha.zoo.models.Zoo;
 import com.stepasha.zoo.services.TelephoneService;
 import com.stepasha.zoo.services.ZooService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,40 +22,50 @@ import java.net.URISyntaxException;
 @RequestMapping(value = "/zoos")
 public class ZooController
 {
+    //todo 10 add logger make sure LSF4J
+    private static final Logger logger = LoggerFactory.getLogger(RestExceptionHandler.class);
     @Autowired
     private ZooService zooService;
     @Autowired
     private TelephoneService telephoneService;
    // http://localhost:2020/zoos/zoos
     @GetMapping(value = "/zoos", produces = {"application/json"})
-    public ResponseEntity<?> listAllZoos()
+    public ResponseEntity<?> listAllZoos(HttpServletRequest request)
     {
+        logger.trace(request.getMethod()
+                .toUpperCase() + " " + request.getRequestURI() + " accessed");
         return new ResponseEntity<>(zooService.findAllZoos(), HttpStatus.OK);
     }
     // http://localhost:2020/zoos/zoos/1
     @GetMapping(value = "/zoos/{id}", produces = {"application/json"})
-    public ResponseEntity<?> findZooById(@PathVariable long id)
+    public ResponseEntity<?> findZooById(HttpServletRequest request, @PathVariable long id)
     {
+        logger.trace(request.getMethod()
+                .toUpperCase() + " " + request.getRequestURI() + " accessed");
         Zoo z = zooService.findZooById(id);
         return new ResponseEntity<>(z, HttpStatus.OK);
     }
 
     // http://localhost:2020/zoos/zoos/name
     @GetMapping(value = "/{name}", produces = {"application/json"})
-    public ResponseEntity<?> findZooByName(@PathVariable String name)
+    public ResponseEntity<?> findZooByName(HttpServletRequest request, @PathVariable String name)
     {
+        logger.trace(request.getMethod()
+                .toUpperCase() + " " + request.getRequestURI() + " accessed");
         Zoo z = zooService.findZooByName(name);
         return new ResponseEntity<>(z, HttpStatus.OK);
     }
     @PutMapping(value = "/zoos/{id}",
             produces = {"application/json"},
             consumes = {"application/json"})
-    public ResponseEntity<?> updateZoo(
+    public ResponseEntity<?> updateZoo(HttpServletRequest request,
             @RequestBody
                     Zoo updateZoo,
             @PathVariable
                     long id)
     {
+        logger.trace(request.getMethod()
+                .toUpperCase() + " " + request.getRequestURI() + " accessed");
         zooService.updateZoo(updateZoo, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
