@@ -9,7 +9,7 @@ A student that completes this project shows that they can:
 
 ## Instructions
 
-Starting with your java-zoo application (instructions for that application can be found at https://github.com/LambdaSchool/java-zoos.git)
+Starting with your java-zoo application (instructions for that application can be found at https://github.com/BloomInstituteOfTechnology/java-zoos.git)
 
 Add appropriate exception handling routines. Required exceptions to handle are when
   * a resource is not found
